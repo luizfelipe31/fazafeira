@@ -1,6 +1,7 @@
 @extends('master')
 
 @section('content')
+
 <section>
     <div class="container">
         <div class="row">
@@ -47,7 +48,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="{{ url("storage/{$product->photo}") }}" alt=""  />
+                                    <img src="{{ url("storage/{$product->photo}") }}" alt="" class="img" />
                                     <h2>R${{number_format($product->price, 2, ',', '.')}}</h2>
                                     <p>{{$product->product_name}} - {{$product->brand}}</p>
                                 </div>

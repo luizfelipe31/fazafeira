@@ -14,9 +14,14 @@ $(function () {
         const email = form.find('input[name="email"]').val();
         const password = form.find('input[name="password_check"]').val();
 
+        var load = $(".ajax_load");
+
+        load.fadeIn(200).css("display", "flex");
+
         $.post(action, {email: email, password: password}, function (response) {
 
             if(response.message) {
+                load.fadeOut(200);
                 ajaxMessage(response.message, 3);
             }
 
@@ -26,6 +31,45 @@ $(function () {
         }, 'json');
 
     });
+
+
+    // $("form:not('.login')").submit(function (event) {
+    //     event.preventDefault();
+    //
+    //     var form = $(this);
+    //     var load = $(".ajax_load");
+    //
+    //     form.ajaxSubmit({
+    //         url: form.attr("action"),
+    //         type: "POST",
+    //         dataType: "json",
+    //         beforeSend: function () {
+    //             load.fadeIn(200).css("display", "flex");
+    //         },
+    //         uploadProgress: function (event, position, total, completed) {
+    //             var loaded = completed;
+    //             var load_title = $(".ajax_load_box_title");
+    //             load_title.text("Enviando (" + loaded + "%)");
+    //
+    //             if (completed >= 100) {
+    //                 load_title.text("Aguarde, carregando...");
+    //             }
+    //         },
+    //         success: function (response) {
+    //             if(response.message) {
+    //                 load.fadeOut(200);
+    //                 ajaxMessage(response.message, 3);
+    //             }
+    //
+    //             if(response.redirect) {
+    //                 window.location.href = response.redirect;
+    //             }
+    //         },
+    //         error: function (response) {
+    //             load.fadeOut(200);
+    //         }
+    //     });
+    // });
 
     // AJAX RESPONSE
     var ajaxResponseBaseTime = 3;
