@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('brand');
             $table->decimal('price', 10, 2);
             $table->integer('stock');
+            $table->unsignedInteger('user');
             $table->string('photo');
             $table->boolean('status');
             $table->timestamps();

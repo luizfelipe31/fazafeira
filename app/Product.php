@@ -11,6 +11,7 @@ class Product extends Model
         'brand',
         'price',
         'stock',
+        'user',
         'photo',
         'status',
     ];
@@ -18,6 +19,11 @@ class Product extends Model
     public function brand()
     {
         return $this->hasOne(Brand::class, 'id', 'brand');
+    }
+    
+    public function user_name()
+    {
+        return $this->hasOne(User::class, 'id', 'user');
     }
 
 }

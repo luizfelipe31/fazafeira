@@ -14,13 +14,21 @@
                             <!--form action="{{ route('admin') }}" method="get" autocomplete="off" -->
                                 <form action="">
                                 <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         <input type="text" name="q" class="form-control" @if(isset($product_name)) value="{{$product_name}}" @endif placeholder="Produto"/>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         <input type="text" name="brand" class="form-control" @if(isset($brand)) value="{{$brand}}" @endif placeholder="Marca"/>
                                     </div>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
+                                        <select name="user">
+                                            <option value="">--Selecione--</option>
+                                            @foreach($users as $user)
+                                              <option @if($user_choice==$user->id) selected @endif value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
                                         <button class="btn btn-primary">Filtrar</button>
                                         <!--input type="submit" name="submit" class="btn btn-primary" value="Procurar"-->
                                     </div>
@@ -35,6 +43,7 @@
                                         <td class="description">Produto</td>
                                         <td class="brand">Marca</td>
                                         <td class="price">Price</td>
+                                        <td class="price">Criado por</td>
                                         <td class="quantity">Status</td>
                                         <td class="total">Alterar</td>
                                         <td></td>
@@ -54,6 +63,9 @@
                                         </td>
                                         <td class="cart_description">
                                             <h4>R${{number_format($product->price, 2, ',', '.')}}</h4>
+                                        </td>
+                                        <td>
+                                            <h4>{{$product->user_name}}</h4>
                                         </td>
                                         <td class="cart_description">
                                             <h4>@if($product->status==1) Ativo @else Inativo @endif</h4>

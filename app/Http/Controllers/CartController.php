@@ -15,6 +15,8 @@ class CartController extends Controller
      */
     public function addCart($id, Request $request){
 
+     $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
      $cart = Cart::where("product",$id)->where("user",Auth::user()->id)->first();
 
      $product = Product::where("id", $id)->first();
@@ -54,6 +56,9 @@ class CartController extends Controller
     }
 
     public function add($id, Request $request) {
+        
+        $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
         $cart = Cart::where("id",$id)->first();
 
         $cart->quantity= $cart->quantity + 1;
@@ -66,6 +71,9 @@ class CartController extends Controller
     }
 
     public function sub($id, Request $request) {
+        
+        $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
         $cart = Cart::where("id",$id)->first();
 
         if(($cart->quantity - 1)==0){
@@ -97,6 +105,8 @@ class CartController extends Controller
      */
     public function addNewWish($id, Request $request){
 
+     $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
      $wish = Wish::where("product",$id)->where("user",Auth::user()->id)->first();
 
      if(!$wish){
@@ -118,6 +128,9 @@ class CartController extends Controller
     }
     
     public function addWish($id, Request $request) {
+        
+        $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
         $wish = Wish::where("id",$id)->first();
 
         $wish->quantity= $wish->quantity + 1;
@@ -128,6 +141,9 @@ class CartController extends Controller
     }
 
     public function subWish($id, Request $request) {
+        
+        $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
+        
         $wish = Wish::where("id",$id)->first();
 
         if(($wish->quantity - 1)==0){
@@ -144,6 +160,8 @@ class CartController extends Controller
     }
     
     public function addCartWish($id, Request $request) {
+        
+        $id = filter_var($id, FILTER_SANITIZE_STRIPPED);
         
         $wish = Wish::where("id",$id)->first();
         

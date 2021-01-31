@@ -39,6 +39,7 @@ class Product extends FormRequest
             'name' => 'required|min:3|max:191',
             'brand' => 'required',
             'price' => 'required',
+            'user' => 'required',
             'stock' => 'required',
             'status' => 'required',
 

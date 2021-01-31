@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Brand;
 use App\Product;
+use App\User;
 use App\Http\Requests\Product as ProdutcRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,27 +25,45 @@ class ProductController extends Controller
 
         if($request->q!="" || $request->brand!=""){
 
-            $products = DB::table('products')
-                ->select('products.id as id','products.name as product_name','brands.name as brand','price','photo','products.status')
+            if($request->user){
+                $products = DB::table('products')
+                ->select('products.id as id','products.name as product_name','brands.name as brand','price','photo','products.status','users.name as user_name')
                 ->join('brands','brand','=','brands.id')
+                ->join('users','user','=','users.id')
+                ->where('products.name','LIKE','%'.$request->q.'%')
+                ->Where('brands.name','LIKE','%'.$request->brand.'%')
+                ->Where('user',$request->user)
+                ->orderBy('products.name')->simplePaginate('5');    
+            }else{
+                $products = DB::table('products')
+                ->select('products.id as id','products.name as product_name','brands.name as brand','price','photo','products.status','users.name as user_name')
+                ->join('brands','brand','=','brands.id')
+                ->join('users','user','=','users.id')
                 ->where('products.name','LIKE','%'.$request->q.'%')
                 ->Where('brands.name','LIKE','%'.$request->brand.'%')
                 ->orderBy('products.name')->simplePaginate('5');
+            }
+
 
         }else {
 
             $products = DB::table('products')
-            ->select('products.id as id','products.name as product_name','brands.name as brand','price','photo','products.status')
+            ->select('products.id as id','products.name as product_name','brands.name as brand','price','photo','products.status','users.name as user_name')
             ->join('brands','brand','=','brands.id')
-                ->orderBy('products.name')->simplePaginate('5');
+            ->join('users','user','=','users.id')
+            ->orderBy('products.name')->simplePaginate('5');
 
         }
 
+        $users = User::where('admin',1)->orderBy('name')->get();
+        
         return view('admin.product', [
             "title" => "Admin | Produto",
             "products" => $products,
             "product_name" => $request->q,
             "brand" => $request->brand,
+            "user_choice" => $request->user,
+            "users" => $users
         ]);
     }
 
@@ -69,7 +88,7 @@ class ProductController extends Controller
         }
 
         $product = Product::create($request->all());
-
+        
         $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
 
         if($validator->fails() === true) {
@@ -101,7 +120,7 @@ class ProductController extends Controller
         }
 
         $brands = Brand::where('status',1)->orderBy('name')->get();
-
+        
         return view('admin.product-edit', [
             "title" => "Admin | Editar Produto",
             "product" => $product,

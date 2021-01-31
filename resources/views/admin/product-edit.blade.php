@@ -43,6 +43,10 @@
                                 <label>Ativo:</label>
                                 <input type="checkbox" name="status"  {{ (old('status') == 'on' || old('status') == "1" ? 'checked' : ($product->status == "1" ? 'checked' : '')) }} value="1">
                             </div>
+                            <div class="form-group col-md-12">
+                                <label>Criado por:</label>
+                                {{$product->user_name->name}}
+                            </div>
                             <div class="form-group col-md-6">
                                 <input type="submit" name="submit" class="btn btn-primary pull-left" value="Editar">
                             </div>

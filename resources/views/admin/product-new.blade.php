@@ -9,6 +9,7 @@
                         <h2 class="title text-center">Cadastrar Produto</h2>
                         <form action="{{ route('product.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                         @csrf
+                             <input type="hidden" name="user" value="{{ Auth::user()->id }}">
                             <div class="form-group col-md-6">
                             <label>Nome do Produto</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name') }}" required="required" placeholder="Nome do produto">
