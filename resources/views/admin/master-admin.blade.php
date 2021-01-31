@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title><?=$title?> | E-Shopper</title>
+    <title><?=$title?> | FazAFeira - E-commerce</title>
     <link href="{{url(mix('backend/assets/css/libs.css'))}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <![endif]-->
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-md-4 clearfix">
                     <div class="logo pull-left">
-                        <a href="{{ route('index') }}"><img src="{{url(asset('backend/assets/images/logo.png'))}}" alt="" /></a>
+                        <a href="{{ route('index') }}"><img src="{{url(asset('backend/assets/images/logo2.png'))}}" alt="" /></a>
                     </div>
 
                 </div>
@@ -114,8 +114,8 @@
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
-            <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-            <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+            <p class="pull-left">Copyright © 2021 FazAFeira. Todos os direitos reservados.</p>
+            <p class="pull-right"></span></p>
         </div>
     </div>
 </div>
