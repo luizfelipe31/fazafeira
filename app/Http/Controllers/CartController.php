@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-
+use App\Wish;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -79,5 +79,101 @@ class CartController extends Controller
 
         $request->session()->flash('success', 'Produto retirado do carrinho!');
         return redirect()->route('cart.show');
+    }
+    
+    public function wish() {
+
+        $wish = Wish::where("user",Auth::user()->id)->get();
+        
+        return view('wish', [
+            "title" => "Lista de Desejo",
+            "wishs" => $wish
+        ]);
+
+    }
+    
+    /**
+     * @param $id
+     */
+    public function addNewWish($id, Request $request){
+
+     $wish = Wish::where("product",$id)->where("user",Auth::user()->id)->first();
+
+     if(!$wish){
+         $createWish = new Wish();
+         $createWish->product = $id;
+         $createWish->user = Auth::user()->id;
+         $createWish->quantity = 1;
+
+         $createWish->save();
+     }else{
+
+         $wish->quantity = $wish->quantity + 1;
+
+         $wish->save();
+     }
+
+        $request->session()->flash('success', 'Produto adicionado a lista de desejo!');
+        return redirect()->route('index');
+    }
+    
+    public function addWish($id, Request $request) {
+        $wish = Wish::where("id",$id)->first();
+
+        $wish->quantity= $wish->quantity + 1;
+        $wish->save();
+
+        $request->session()->flash('success', 'Produto adicionado a lista de desejo!');
+        return redirect()->route('wish.wish');
+    }
+
+    public function subWish($id, Request $request) {
+        $wish = Wish::where("id",$id)->first();
+
+        if(($wish->quantity - 1)==0){
+            $wish->delete();
+        }else {
+
+            $wish->quantity = $wish->quantity - 1;
+            $wish->save();
+
+        }
+
+        $request->session()->flash('success', 'Produto retirado da lista de desejo!');
+        return redirect()->route('wish.wish');
+    }
+    
+    public function addCartWish($id, Request $request) {
+        
+        $wish = Wish::where("id",$id)->first();
+        
+        $cart = Cart::where("product",$wish->product)->where("user",Auth::user()->id)->first();
+        
+        $product = Product::where("id", $wish->product)->first();
+
+        if($product->stock==0){
+            $request->session()->flash('danger', 'Produto não tem mais no stoque!');
+            return redirect()->route('wish.wish');
+        }
+
+        
+        if(!$cart){
+            $createCart = new Cart();
+            $createCart->product = $wish->product;
+            $createCart->user = Auth::user()->id;
+            $createCart->quantity = $wish->quantity;
+
+            $createCart->save();
+        }else{
+
+            $cart->quantity = $cart->quantity + $wish->quantity;
+
+            $cart->save();
+        }
+        
+        $wish->delete();
+        
+        $request->session()->flash('success', 'Produto adicionado ao carrinho!');
+        return redirect()->route('wish.wish');
     }
 }

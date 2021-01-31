@@ -70,13 +70,9 @@
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
                                     @if(Auth::user())
-                                    @if($product->stock>=1)
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Adicionar a lista de desejo</a></li>
+                                     <li><a href="{{ route('wish.addNewWish', ['wish' => $product->id]) }}"><i class="fa fa-plus-square"></i>Adicionar a lista de desejo</a></li>
                                     @else
-
-                                    @endif
-                                    @else
-                                    <li><a onclick="alert('É necessário está logado para adicionar um produto a lista de desejos.')" href="#"><i class="fa fa-plus-square"></i>Adicionar a lista de desejo</a></li>
+                                     <li><a onclick="alert('É necessário está logado para adicionar um produto a lista de desejos.')" href="#"><i class="fa fa-plus-square"></i>Adicionar a lista de desejo</a></li>
                                     @endif
  
                                 </ul>

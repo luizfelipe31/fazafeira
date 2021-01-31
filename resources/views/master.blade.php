@@ -61,7 +61,7 @@
                             <li><a href="{{ route('index') }}"><i class="fa fa-home"></i> Home</a></li>
                             @php if(Auth::user()): @endphp
                             <li><a href="{{ route('user.home') }}"><i class="fa fa-user"></i> Minha Conta</a></li>
-                            <li><a href=""><i class="fa fa-star"></i> Lista de Desejos</a></li>
+                            <li><a href="{{ route('wish.wish') }}"><i class="fa fa-star"></i> Lista de Desejos</a></li>
                             <li><a href="{{ route('cart.show') }}"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
                             @php endif; @endphp
                             <li><a href="{{ route('contact') }}"><i class="fa fa-phone"></i> Fale Conosco</a></li>

@@ -30,7 +30,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('carrinho/add/{id}', 'CartController@add')->name('cart.add');
     Route::get('carrinho/sub/{id}', 'CartController@sub')->name('cart.sub');
     Route::get('carrinho', 'CartController@show')->name('cart.show');
+    Route::get('carrinho/adicionar/carrinho/{id}', 'CartController@addCartWish')->name('cart.addCartWish');
 
+    /** wish */
+    Route::get('lista-desejo/adicionar/{id}', 'CartController@addNewWish')->name('wish.addNewWish');
+    Route::get('lista-desejo/add/{id}', 'CartController@addWish')->name('wish.addWish');
+    Route::get('lista-desejo/sub/{id}', 'CartController@subWish')->name('wish.subWish');
+    Route::get('lista-desejo', 'CartController@wish')->name('wish.wish');
+    
     /** sale */
     Route::post('venda', 'SaleController@addSale')->name('sale.addSale');
     Route::get('admin/vendas', 'SaleController@index')->name('admin.sale');
