@@ -194,4 +194,16 @@ class CartController extends Controller
         $request->session()->flash('success', 'Produto adicionado ao carrinho!');
         return redirect()->route('wish.wish');
     }
+    
+     public function adminWish() {
+         
+        $wish = (new Wish)->get();
+        
+        return view('admin.admin-wish', [
+            "title" => "Lista de Desejo",
+            "wishs" => $wish
+        ]);
+         
+     }
+    
 }

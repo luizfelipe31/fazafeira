@@ -16,4 +16,9 @@ class Wish extends Model
     {
         return $this->hasOne(Product::class, 'id', 'product');
     }
+    
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user');
+    }
 }

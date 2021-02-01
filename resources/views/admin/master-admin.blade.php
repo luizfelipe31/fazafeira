@@ -49,18 +49,19 @@
     <div class="header-middle"><!--header-middle-->
         <div class="container">
             <div class="row">
-                <div class="col-md-4 clearfix">
+                <div class="col-md-3 clearfix">
                     <div class="logo pull-left">
                         <a href="{{ route('index') }}"><img src="{{url(asset('backend/assets/images/logo2.png'))}}" alt="" /></a>
                     </div>
 
                 </div>
-                <div class="col-md-8 clearfix">
+                <div class="col-md-9 clearfix">
                     <div class="shop-menu clearfix pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ route('index') }}"><i class="fa fa-arrow-left"></i> Voltar para loja</a></li>
                             <li><a href="{{ route('admin') }}"> Produtos</a></li>
                             <li><a href="{{ route('admin.brand') }}"> Marcas</a></li>
+                            <li><a href="{{ route('admin.wish') }}"> Lista de Desejos</a></li>
                             <li><a href="{{ route('admin.sale') }}"> Vendas</a></li>
                             <li><a href="{{ route('admin.menssage') }}"> Mensagens</a>
                             <li><a href="{{ route('admin.user') }}"> Usuarios</a></li>

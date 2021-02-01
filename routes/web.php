@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('lista-desejo/sub/{id}', 'CartController@subWish')->name('wish.subWish');
     Route::get('lista-desejo', 'CartController@wish')->name('wish.wish');
     
+    /** wish admin */
+    Route::get('admin/lista-desejo', 'CartController@adminWish')->name('admin.wish');
+    
     /** sale */
     Route::post('venda', 'SaleController@addSale')->name('sale.addSale');
     Route::get('admin/vendas', 'SaleController@index')->name('admin.sale');
